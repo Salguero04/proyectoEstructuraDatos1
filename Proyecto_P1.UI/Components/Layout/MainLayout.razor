@@ -1,0 +1,32 @@
+@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1" Style="background-color: var(--ug-gris-claro); border-bottom: 2px solid var(--ug-azul-claro);">
+        <img src="images/logo-vertical.png" alt="Logo UG" style="height: 40px; margin-right: 16px;" />
+        <MudText Typo="Typo.subtitle1" Style="color: var(--ug-azul-oscuro); font-weight: 600; font-style: italic; letter-spacing: 0.5px;">
+            PROYECTO DE ESTRUCTURA DE DATOS
+        </MudText>
+        <MudSpacer />
+    </MudAppBar>
+
+    <MudDrawer Open="true" Elevation="2" Style="background-color: var(--ug-gris-claro);" ClipMode="DrawerClipMode.Always" Variant="DrawerVariant.Persistent">
+        <MudNavMenu Style="margin-top: 10px;">
+            <MudNavLink Href="/arreglos" Icon="@Icons.Material.Filled.List" IconColor="Color.Info" Style="font-weight: 600; color: var(--ug-azul-oscuro);">Arreglos</MudNavLink>
+            <MudNavLink Href="/recursividad" Icon="@Icons.Material.Filled.Loop" IconColor="Color.Info" Style="font-weight: 600; color: var(--ug-azul-oscuro);">Recursividad</MudNavLink>
+            <MudNavLink Href="/ordenamiento" Icon="@Icons.Material.Filled.Sort" IconColor="Color.Info" Style="font-weight: 600; color: var(--ug-azul-oscuro);">Ordenamiento</MudNavLink>
+            <MudNavLink Href="/busqueda" Icon="@Icons.Material.Filled.Search" IconColor="Color.Info" Style="font-weight: 600; color: var(--ug-azul-oscuro);">Búsqueda</MudNavLink>
+            <MudNavLink Href="/" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error" Style="font-weight: 600; color: var(--ug-azul-oscuro); margin-top: 20px;">Salir</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="pa-6">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>

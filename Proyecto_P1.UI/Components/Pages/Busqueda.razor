@@ -1,0 +1,22 @@
+@page "/busqueda"
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+
+<PageTitle>Búsqueda - Proyecto Estructura de Datos</PageTitle>
+
+<div>
+    <div class="app-body">
+        <div class="app-sidebar slide-in-left">
+            <button class="sidebar-btn" id="btnSecuencial">Búsqueda Secuencial</button>
+            <button class="sidebar-btn" id="btnBinaria">Búsqueda Binaria</button>
+
+        </div>
+        <div class="app-content fade-in d-flex justify-center align-center">
+            <img src="images/logo-vertical.png" alt="Logo UG" class="content-logo" style="max-width: 400px; width: 100%; opacity: 0.9;" />
+        </div>
+    </div>
+</div>
+
+@code {
+    // Componente solo visual por requerimiento explícito.
+}

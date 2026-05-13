@@ -1,0 +1,369 @@
+@page "/arreglos"
+@rendermode InteractiveServer
+@inject VehiculoService VehiculoService
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject NavigationManager Navigation
+
+<PageTitle>Arreglos - Proyecto Estructura de Datos</PageTitle>
+
+<div>
+    <div class="app-body">
+        <!-- Sidebar -->
+        <div class="app-sidebar slide-in-left" style="overflow-y: auto;">
+            <MudText Typo="Typo.subtitle2" Style="color: var(--ug-azul-oscuro); font-weight: 700; padding-left: 8px; margin-top: 8px;">SECCIÓN TEÓRICA</MudText>
+            
+            <button class="sidebar-btn @(_accionActual == "descripcion" ? "btn-active" : "")"
+                    @onclick='() => MostrarTeoria("descripcion")'>Descripción</button>
+            <button class="sidebar-btn @(_accionActual == "algoritmo" ? "btn-active" : "")"
+                    @onclick='() => MostrarTeoria("algoritmo")'>Algoritmo</button>
+            <button class="sidebar-btn @(_accionActual == "prueba" ? "btn-active" : "")"
+                    @onclick='() => MostrarTeoria("prueba")'>Prueba Escritorio</button>
+
+            <MudDivider Style="margin: 10px 0; border-width: 2px; border-color: rgba(0,0,0,0.1);" />
+            <MudText Typo="Typo.subtitle2" Style="color: var(--ug-azul-oscuro); font-weight: 700; padding-left: 8px;">APLICACIÓN PRÁCTICA</MudText>
+
+            <button class="sidebar-btn @(_accionActual == "insertar" ? "btn-active" : "")"
+                    @onclick="MostrarInsertar" id="btnInsertar">Insertar</button>
+            <button class="sidebar-btn @(_accionActual == "eliminar" ? "btn-active" : "")"
+                    @onclick="MostrarEliminar" id="btnEliminar">Eliminar</button>
+            <button class="sidebar-btn @(_accionActual == "modificar" ? "btn-active" : "")"
+                    @onclick="MostrarModificar" id="btnModificar">Modificar</button>
+            <button class="sidebar-btn @(_accionActual == "buscar" ? "btn-active" : "")"
+                    @onclick="MostrarBuscar" id="btnBuscar">Buscar</button>
+        </div>
+
+        <!-- Content -->
+        <div class="app-content fade-in" style="justify-content: flex-start; align-items: stretch; padding-top: 30px;">
+            
+            @if (_accionActual == "descripcion")
+            {
+                <div class="fade-in" style="max-width: 800px; margin: 0 auto; width: 100%;">
+                    <MudText Typo="Typo.h5" Color="Color.Primary" Style="font-weight: 700; margin-bottom: 20px;">Descripción del Programa</MudText>
+                    <MudPaper Elevation="2" Class="pa-6" Style="background: var(--ug-gris-claro); border-left: 5px solid var(--ug-azul-medio);">
+                        <MudText Typo="Typo.body1" Style="margin-bottom: 12px; line-height: 1.6;">
+                            Este programa consiste en la gestión de un inventario o registro de un parque automotor (donde cada registro contiene una <strong>Placa</strong> y un <strong>Propietario</strong>), aplicando de forma estricta los conceptos de <strong>Estructuras de Datos Estáticas (Arreglos Primitivos Unidimensionales)</strong>.
+                        </MudText>
+                        <MudText Typo="Typo.body1" Style="margin-bottom: 12px; line-height: 1.6;">
+                            Al tratarse de arreglos estáticos en C# (<code>Vehiculo[]</code>), la memoria es asignada en bloques contiguos de tamaño fijo. Las operaciones principales implementadas son:
+                        </MudText>
+                        <ul style="padding-left: 20px; line-height: 1.8;">
+                            <li><strong>Inserción:</strong> Control de capacidad manual y redimensionamiento dinámico multiplicando la capacidad base (*2) cuando se llena y copiando elementos a un nuevo bloque de memoria.</li>
+                            <li><strong>Eliminación:</strong> Desplazamiento manual en cascada (shift) de los elementos posteriores hacia la izquierda mediante un bucle <code>for</code>, para ocupar el espacio liberado por un vehículo borrado.</li>
+                            <li><strong>Actualización (Modificar):</strong> Acceso directo a una posición de memoria calculada mediante su índice algorítmico <code>O(1)</code>.</li>
+                            <li><strong>Búsqueda (Consultar):</strong> Búsqueda Secuencial con un recorrido iterativo <code>O(n)</code> sobre el arreglo primitivo desde la posición <code>0</code> hasta el límite lógico (Cantidad actual).</li>
+                        </ul>
+                    </MudPaper>
+                </div>
+            }
+            else if (_accionActual == "algoritmo")
+            {
+                <div class="fade-in" style="max-width: 800px; margin: 0 auto; width: 100%;">
+                    <MudText Typo="Typo.h5" Color="Color.Primary" Style="font-weight: 700; margin-bottom: 20px;">Algoritmo de Arreglos (Código C#)</MudText>
+                    
+                    <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" Class="pa-4">
+                        <MudTabPanel Text="Inserción y Resize">
+                            <pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: Consolas, monospace; font-size: 0.85rem;">
+// 1. Redimensionar si el arreglo está lleno
+if (_cantidad == _vehiculos.Length)
+{
+    Vehiculo[] nuevoArreglo = new Vehiculo[_vehiculos.Length * 2];
+    for (int i = 0; i &lt; _cantidad; i++)
+    {
+        nuevoArreglo[i] = _vehiculos[i]; // Copiado manual
+    }
+    _vehiculos = nuevoArreglo; // Reasignar referencia
+}
+
+// 2. Inserción al final de la memoria ocupada
+_vehiculos[_cantidad] = vehiculo;
+_cantidad++; // Incrementar tamaño lógico
+                            </pre>
+                        </MudTabPanel>
+                        <MudTabPanel Text="Eliminación (Shift Left)">
+                            <pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: Consolas, monospace; font-size: 0.85rem;">
+// Desplazar elementos a la izquierda para cubrir el hueco
+for (int i = indice; i &lt; _cantidad - 1; i++)
+{
+    // El elemento actual es sobreescrito por el de su derecha
+    _vehiculos[i] = _vehiculos[i + 1]; 
+}
+
+// Liberar la última referencia para el Recolector de Basura
+_vehiculos[_cantidad - 1] = null;
+_cantidad--; // Reducir tamaño lógico
+                            </pre>
+                        </MudTabPanel>
+                    </MudTabs>
+                </div>
+            }
+            else if (_accionActual == "prueba")
+            {
+                <div class="fade-in" style="max-width: 900px; margin: 0 auto; width: 100%;">
+                    <MudText Typo="Typo.h5" Color="Color.Primary" Style="font-weight: 700; margin-bottom: 20px;">Prueba de Escritorio de Arreglos</MudText>
+                    
+                    <MudTable Items="@_pasosPrueba" Hover="true" Breakpoint="Breakpoint.Sm" Elevation="2" Class="mb-4">
+                        <HeaderContent>
+                            <MudTh>Paso</MudTh>
+                            <MudTh>Acción</MudTh>
+                            <MudTh>Valor Procesado</MudTh>
+                            <MudTh>Contador Lógico</MudTh>
+                            <MudTh>Estado del Arreglo en Memoria</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Paso">@context.Paso</MudTd>
+                            <MudTd DataLabel="Acción"><strong>@context.Accion</strong></MudTd>
+                            <MudTd DataLabel="Valor Procesado">@context.Valor</MudTd>
+                            <MudTd DataLabel="Contador Lógico">@context.Cantidad</MudTd>
+                            <MudTd DataLabel="Estado del Arreglo en Memoria">
+                                <code style="background: #e0e0e0; padding: 4px 8px; border-radius: 4px; color: #d81b60; font-family: Consolas;">@context.EstadoArreglo</code>
+                            </MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                </div>
+            }
+            else
+            {
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; width: 100%; height: 100%;">
+                    @if (_mostrarFormulario)
+                    {
+                        <div class="dialog-form fade-in" style="width: 100%; max-width: 450px; margin-bottom: 20px;">
+                            <MudText Typo="Typo.h6" Style="color: var(--ug-azul-oscuro); margin-bottom: 16px; font-weight: 600; text-align: center;">
+                                @_tituloFormulario
+                            </MudText>
+
+                            @if (_accionActual == "insertar" || _accionActual == "modificar")
+                            {
+                                <MudTextField @bind-Value="_placa" Label="Placa (7-8 caracteres)" Variant="Variant.Outlined"
+                                              Margin="Margin.Dense" Style="margin-bottom: 12px;" id="txtPlaca" />
+                                <MudTextField @bind-Value="_propietario" Label="Propietario" Variant="Variant.Outlined"
+                                              Margin="Margin.Dense" Style="margin-bottom: 12px;" id="txtPropietario" />
+
+                                @if (_accionActual == "modificar")
+                                {
+                                    <MudNumericField @bind-Value="_indiceModificar" Label="Índice a modificar" Variant="Variant.Outlined"
+                                                     Margin="Margin.Dense" Style="margin-bottom: 12px;" Min="0" id="txtIndice" />
+                                }
+
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="EjecutarAccion"
+                                           Style="border-radius: 8px; text-transform: none; font-weight: 600; width: 100%;" id="btnEjecutar">
+                                    @_accionActual.ToUpper()
+                                </MudButton>
+                            }
+                            else if (_accionActual == "eliminar")
+                            {
+                                <MudTextField @bind-Value="_placaEliminar" Label="Placa del vehículo a eliminar" Variant="Variant.Outlined"
+                                              Margin="Margin.Dense" Style="margin-bottom: 12px;" id="txtPlacaEliminar" />
+                                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="EjecutarAccion"
+                                           Style="border-radius: 8px; text-transform: none; font-weight: 600; width: 100%;" id="btnEjecutarEliminar">
+                                    ELIMINAR
+                                </MudButton>
+                            }
+                            else if (_accionActual == "buscar")
+                            {
+                                <MudTextField @bind-Value="_placaBuscar" Label="Placa a buscar" Variant="Variant.Outlined"
+                                              Margin="Margin.Dense" Style="margin-bottom: 12px;" id="txtPlacaBuscar" />
+                                <MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="EjecutarAccion"
+                                           Style="border-radius: 8px; text-transform: none; font-weight: 600; width: 100%;" id="btnEjecutarBuscar">
+                                    BUSCAR
+                                </MudButton>
+
+                                @if (_vehiculoEncontrado != null)
+                                {
+                                    <MudAlert Severity="Severity.Success" Style="margin-top: 12px;" id="alertResultado">
+                                        Encontrado: @_vehiculoEncontrado.ToString()
+                                    </MudAlert>
+                                }
+                                else if (_busquedaRealizada)
+                                {
+                                    <MudAlert Severity="Severity.Warning" Style="margin-top: 12px;">
+                                        No se encontró un vehículo con esa placa.
+                                    </MudAlert>
+                                }
+                            }
+                        </div>
+                    }
+
+                    @if (_mensaje != null)
+                    {
+                        <MudAlert Severity="@_severidad" Style="margin-top: 12px; max-width: 450px; width: 100%;" ShowCloseIcon="true"
+                                  CloseIconClicked="() => _mensaje = null">
+                            @_mensaje
+                        </MudAlert>
+                    }
+
+                    <!-- Visualización del Arreglo -->
+                    <div class="arreglo-container" style="margin-top: 10px; flex: 1;">
+                        <div class="arreglo-titulo">
+                            Arreglo de Vehículos (@_vehiculos.Length elementos lógicos)
+                        </div>
+                        <div class="arreglo-visual">
+                            @if (_vehiculos.Length == 0)
+                            {
+                                <div class="arreglo-vacio text-center">
+                                    El arreglo está vacío. Utiliza la sección "Insertar".
+                                </div>
+                            }
+                            else
+                            {
+                                @for (int i = 0; i < _vehiculos.Length; i++)
+                                {
+                                    var vehiculo = _vehiculos[i];
+                                    var indice = i;
+                                    <div class="arreglo-celda fade-in">
+                                        <div class="celda-indice">@indice</div>
+                                        <div class="celda-placa">@vehiculo.Placa</div>
+                                        <div class="celda-propietario">@vehiculo.Propietario</div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private Vehiculo[] _vehiculos = Array.Empty<Vehiculo>();
+    private string _accionActual = "descripcion"; // Por defecto mostrar descripción teórica
+    private string _tituloFormulario = "";
+    private bool _mostrarFormulario = false;
+
+    // Campos del formulario
+    private string _placa = "";
+    private string _propietario = "";
+    private int _indiceModificar = 0;
+    private string _placaEliminar = "";
+    private string _placaBuscar = "";
+
+    // Resultados
+    private Vehiculo? _vehiculoEncontrado;
+    private bool _busquedaRealizada = false;
+    private string? _mensaje;
+    private Severity _severidad = Severity.Info;
+
+    // Datos para la tabla de prueba de escritorio
+    private List<PasoPrueba> _pasosPrueba = new()
+    {
+        new PasoPrueba { Paso = 1, Accion = "Instanciación", Valor = "Vehiculo[10]", Cantidad = 0, EstadoArreglo = "[ null, null... ]" },
+        new PasoPrueba { Paso = 2, Accion = "Insertar()", Valor = "ABC-123", Cantidad = 1, EstadoArreglo = "[ ABC-123, null... ]" },
+        new PasoPrueba { Paso = 3, Accion = "Insertar()", Valor = "XYZ-999", Cantidad = 2, EstadoArreglo = "[ ABC-123, XYZ-999, null... ]" },
+        new PasoPrueba { Paso = 4, Accion = "Consultar()", Valor = "ABC-123", Cantidad = 2, EstadoArreglo = "[ ABC-123, XYZ-999, null... ]" },
+        new PasoPrueba { Paso = 5, Accion = "Eliminar()", Valor = "Índice 0 (ABC-123)", Cantidad = 1, EstadoArreglo = "[ XYZ-999, null, null... ] (Shift Left)" },
+        new PasoPrueba { Paso = 6, Accion = "Actualizar()", Valor = "Índice 0 -> DEF-456", Cantidad = 1, EstadoArreglo = "[ DEF-456, null, null... ]" }
+    };
+
+    private class PasoPrueba
+    {
+        public int Paso { get; set; }
+        public string Accion { get; set; } = "";
+        public string Valor { get; set; } = "";
+        public int Cantidad { get; set; }
+        public string EstadoArreglo { get; set; } = "";
+    }
+
+    protected override void OnInitialized()
+    {
+        CargarVehiculos();
+    }
+
+    private void CargarVehiculos()
+    {
+        _vehiculos = VehiculoService.ObtenerTodos();
+    }
+
+    private void MostrarTeoria(string accion)
+    {
+        _accionActual = accion;
+        _mostrarFormulario = false;
+        LimpiarMensaje();
+    }
+
+    private void MostrarInsertar()
+    {
+        _accionActual = "insertar";
+        _tituloFormulario = "Insertar Vehículo";
+        _mostrarFormulario = true;
+        _placa = ""; _propietario = "";
+        LimpiarMensaje();
+    }
+
+    private void MostrarEliminar()
+    {
+        _accionActual = "eliminar";
+        _tituloFormulario = "Eliminar Vehículo";
+        _mostrarFormulario = true;
+        _placaEliminar = "";
+        LimpiarMensaje();
+    }
+
+    private void MostrarModificar()
+    {
+        _accionActual = "modificar";
+        _tituloFormulario = "Actualizar Vehículo";
+        _mostrarFormulario = true;
+        _placa = ""; _propietario = ""; _indiceModificar = 0;
+        LimpiarMensaje();
+    }
+
+    private void MostrarBuscar()
+    {
+        _accionActual = "buscar";
+        _tituloFormulario = "Consultar Vehículo";
+        _mostrarFormulario = true;
+        _placaBuscar = "";
+        _vehiculoEncontrado = null;
+        _busquedaRealizada = false;
+        LimpiarMensaje();
+    }
+
+    private void LimpiarMensaje()
+    {
+        _mensaje = null;
+    }
+
+    private void EjecutarAccion()
+    {
+        try
+        {
+            switch (_accionActual)
+            {
+                case "insertar":
+                    VehiculoService.Insertar(_placa, _propietario);
+                    _mensaje = $"Vehículo [{_placa.ToUpper()}] insertado exitosamente.";
+                    _severidad = Severity.Success;
+                    _placa = ""; _propietario = "";
+                    break;
+
+                case "eliminar":
+                    VehiculoService.EliminarPorPlaca(_placaEliminar);
+                    _mensaje = $"Vehículo [{_placaEliminar.ToUpper()}] eliminado exitosamente.";
+                    _severidad = Severity.Success;
+                    _placaEliminar = "";
+                    break;
+
+                case "modificar":
+                    VehiculoService.Modificar(_indiceModificar, _placa, _propietario);
+                    _mensaje = $"Vehículo en índice [{_indiceModificar}] modificado exitosamente.";
+                    _severidad = Severity.Success;
+                    _placa = ""; _propietario = "";
+                    break;
+
+                case "buscar":
+                    _vehiculoEncontrado = VehiculoService.BuscarPorPlaca(_placaBuscar);
+                    _busquedaRealizada = true;
+                    break;
+            }
+
+            CargarVehiculos();
+        }
+        catch (VehiculoException ex)
+        {
+            _mensaje = ex.Message;
+            _severidad = Severity.Error;
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+}

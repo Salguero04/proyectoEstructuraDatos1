@@ -1,0 +1,69 @@
+@page "/"
+@layout Layout.EmptyLayout
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+
+<PageTitle>Login - Proyecto Estructura de Datos</PageTitle>
+
+<div class="login-container">
+    <div class="login-card fade-in">
+        <h1 class="login-title">BIENVENIDOS AL SISTEMA</h1>
+        <p class="login-subtitle">ESTRUCTURA DE DATOS</p>
+        <p class="login-subtitle">CURSO SOF-S-NO-3-3</p>
+        <p class="login-subtitle">GRUPO No 1</p>
+
+        <img src="images/logo-vertical.png" alt="Logo Universidad de Guayaquil" class="login-logo" />
+
+        <EditForm Model="this" OnSubmit="Ingresar" class="login-form">
+            <MudTextField @bind-Value="_usuario"
+                          Label="Usuario"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense"
+                          Style="margin-bottom: 12px; background: rgba(255,255,255,0.15); border-radius: 8px;"
+                          InputType="InputType.Text"
+                          id="txtUsuario" />
+
+            <MudTextField @bind-Value="_password"
+                          Label="Password"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense"
+                          Style="margin-bottom: 20px; background: rgba(255,255,255,0.15); border-radius: 8px;"
+                          InputType="InputType.Password"
+                          id="txtPassword" />
+
+            @if (!string.IsNullOrEmpty(_error))
+            {
+                <MudAlert Severity="Severity.Error" Style="margin-bottom: 12px; text-align: left;" id="alertError">@_error</MudAlert>
+            }
+
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       ButtonType="ButtonType.Submit"
+                       FullWidth="true"
+                       Size="Size.Large"
+                       Style="border-radius: 12px; font-weight: 600; text-transform: none; font-size: 1rem;"
+                       id="btnIngresar">
+                Ingresar
+            </MudButton>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string _usuario = string.Empty;
+    private string _password = string.Empty;
+    private string _error = string.Empty;
+
+    private void Ingresar()
+    {
+        if (_usuario == "Admin" && _password == "Admin")
+        {
+            _error = string.Empty;
+            Navigation.NavigateTo("/opciones");
+        }
+        else
+        {
+            _error = "Credenciales incorrectas. Intente nuevamente.";
+        }
+    }
+}

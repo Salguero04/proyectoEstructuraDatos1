@@ -1,0 +1,339 @@
+/* ========================================
+   Proyecto Estructura de Datos
+   Universidad de Guayaquil
+   Estilos Globales
+   ======================================== */
+
+:root {
+    --ug-azul-oscuro: #1a3a5c;
+    --ug-azul-medio: #2c5f8a;
+    --ug-azul-claro: #4a90c4;
+    --ug-azul-cielo: #87CEEB;
+    --ug-celeste: #00bcd4;
+    --ug-blanco: #ffffff;
+    --ug-gris-claro: #f0f4f8;
+    --ug-gris: #e0e6ed;
+    --sidebar-width: 180px;
+    --header-height: 50px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+#app {
+    height: 100%;
+}
+
+/* ========================================
+   Login Page Styles
+   ======================================== */
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--ug-azul-medio) 0%, var(--ug-azul-claro) 50%, var(--ug-azul-cielo) 100%);
+    padding: 20px;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.login-title {
+    color: var(--ug-blanco);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.login-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.login-logo {
+    width: 160px;
+    margin: 16px auto;
+    display: block;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.login-form {
+    margin-top: 20px;
+}
+
+/* ========================================
+   Main Layout Styles
+   ======================================== */
+
+.app-header {
+    display: flex;
+    align-items: center;
+    height: var(--header-height);
+    background: linear-gradient(90deg, var(--ug-gris-claro) 0%, var(--ug-gris) 100%);
+    border-bottom: 2px solid var(--ug-azul-claro);
+    padding: 0 16px;
+    gap: 12px;
+}
+
+.app-header-logo {
+    height: 32px;
+    width: auto;
+}
+
+.app-header-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ug-azul-oscuro);
+    letter-spacing: 0.5px;
+}
+
+.app-body {
+    display: flex;
+    height: calc(100vh - 130px);
+    overflow: hidden;
+}
+
+/* ========================================
+   Sidebar Styles (Menú lateral)
+   ======================================== */
+
+.app-sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    background: var(--ug-gris-claro);
+    border-right: 1px solid var(--ug-gris);
+    display: flex;
+    flex-direction: column;
+    padding: 16px 10px;
+    gap: 10px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebar-btn {
+    width: 100%;
+    text-align: left;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--ug-blanco);
+    background: linear-gradient(135deg, var(--ug-azul-medio), var(--ug-azul-claro));
+    box-shadow: 0 2px 8px rgba(44, 95, 138, 0.3);
+}
+
+.sidebar-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(44, 95, 138, 0.5);
+    background: linear-gradient(135deg, var(--ug-azul-oscuro), var(--ug-azul-medio));
+}
+
+.sidebar-btn:active {
+    transform: translateY(0);
+}
+
+.sidebar-btn.btn-salir {
+    margin-top: auto;
+    background: linear-gradient(135deg, #78909c, #90a4ae);
+    box-shadow: 0 2px 8px rgba(120, 144, 156, 0.3);
+}
+
+.sidebar-btn.btn-salir:hover {
+    background: linear-gradient(135deg, #546e7a, #78909c);
+}
+
+.sidebar-btn.btn-active {
+    background: linear-gradient(135deg, var(--ug-azul-oscuro), var(--ug-azul-medio));
+    box-shadow: 0 4px 12px rgba(26, 58, 92, 0.5);
+    transform: scale(1.02);
+}
+
+/* ========================================
+   Content Area Styles
+   ======================================== */
+
+.app-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: var(--ug-blanco);
+    overflow-y: auto;
+}
+
+.content-logo {
+    width: 250px;
+    max-width: 80%;
+    opacity: 0.85;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+}
+
+/* ========================================
+   Arreglo Visual (Array Display)
+   ======================================== */
+
+.arreglo-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.arreglo-titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ug-azul-oscuro);
+}
+
+.arreglo-visual {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 16px;
+    width: 100%;
+}
+
+.arreglo-celda {
+    background: linear-gradient(135deg, var(--ug-azul-claro), var(--ug-azul-medio));
+    color: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+    min-width: 120px;
+    box-shadow: 0 3px 10px rgba(44, 95, 138, 0.3);
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+}
+
+.arreglo-celda:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(44, 95, 138, 0.5);
+}
+
+.arreglo-celda .celda-indice {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    background: var(--ug-azul-oscuro);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.arreglo-celda .celda-placa {
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-bottom: 2px;
+}
+
+.arreglo-celda .celda-propietario {
+    font-size: 0.7rem;
+    opacity: 0.9;
+}
+
+.arreglo-vacio {
+    color: #999;
+    font-style: italic;
+    font-size: 0.9rem;
+    padding: 40px;
+}
+
+/* ========================================
+   Formulario en diálogo
+   ======================================== */
+
+.dialog-form {
+    padding: 16px;
+    min-width: 320px;
+}
+
+/* ========================================
+   Resultados de algoritmos
+   ======================================== */
+
+.resultado-panel {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 16px;
+    padding: 20px;
+    background: var(--ug-gris-claro);
+    border-radius: 12px;
+    border: 1px solid var(--ug-gris);
+}
+
+.resultado-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ug-azul-oscuro);
+    margin-bottom: 10px;
+}
+
+.resultado-valor {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ug-azul-claro);
+    text-align: center;
+    padding: 10px;
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.3s ease-out;
+}
