@@ -32,6 +32,56 @@ public class frmOpciones extends javax.swing.JFrame {
             lblLogoHeader.setText("UG");
             lblLogoCentral.setText("UNIVERSIDAD DE GUAYAQUIL");
         }
+
+        // --- AÑADIR NOMBRES DE LOS ESTUDIANTES ---
+        // Usaremos el pnlContent para agregar la lista de estudiantes debajo del logo
+        pnlContent.removeAll();
+        pnlContent.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new java.awt.Insets(10, 10, 20, 10);
+        
+        // Volver a agregar el logo
+        pnlContent.add(lblLogoCentral, gbc);
+
+        // Panel para los nombres
+        javax.swing.JPanel pnlIntegrantes = new javax.swing.JPanel();
+        pnlIntegrantes.setBackground(new java.awt.Color(255, 255, 255));
+        pnlIntegrantes.setLayout(new javax.swing.BoxLayout(pnlIntegrantes, javax.swing.BoxLayout.Y_AXIS));
+
+        javax.swing.JLabel lblGrupo = new javax.swing.JLabel("GRUPO #1");
+        lblGrupo.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
+        lblGrupo.setForeground(new java.awt.Color(20, 50, 100)); // Azul oscuro institucional
+        lblGrupo.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
+        pnlIntegrantes.add(lblGrupo);
+
+        pnlIntegrantes.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 15)));
+
+        String[] integrantes = {
+            "ALCIVAR CONTRERAS MICHELLE DE JESUS",
+            "BANCHON ARELLANO EDDY RAYMUNDO",
+            "CHIMBOLEMA YUMIZACA LEONEL GILMAR",
+            "JAIME REYES LUIS NAHIN",
+            "ORDEÑANA AREVALO JOSE EMANUEL",
+            "SALGUERO CASTILLO MARIO ALEXANDER"
+        };
+
+        for (String nombre : integrantes) {
+            javax.swing.JLabel lblNom = new javax.swing.JLabel(nombre);
+            lblNom.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 15));
+            lblNom.setForeground(new java.awt.Color(60, 60, 60)); // Gris oscuro
+            lblNom.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
+            pnlIntegrantes.add(lblNom);
+            pnlIntegrantes.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 8)));
+        }
+
+        gbc.gridy = 1;
+        gbc.insets = new java.awt.Insets(0, 10, 10, 10);
+        pnlContent.add(pnlIntegrantes, gbc);
+
+        pnlContent.revalidate();
+        pnlContent.repaint();
     }
 
     /**
@@ -162,17 +212,17 @@ public class frmOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_btnArreglosActionPerformed
 
     private void btnRecursividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecursividadActionPerformed
-        new frmRecursividad().setVisible(true);
+        new SimuladorRecursividad().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRecursividadActionPerformed
 
     private void btnOrdenamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenamientoActionPerformed
-        new frmOrdenamiento().setVisible(true);
+        new com.mycompany.proyectoestructuras1.ordenamientoPokedex.MiniPokedex().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnOrdenamientoActionPerformed
 
     private void btnBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaActionPerformed
-        new frmBusqueda().setVisible(true);
+        new MetodosBusqueda().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBusquedaActionPerformed
 

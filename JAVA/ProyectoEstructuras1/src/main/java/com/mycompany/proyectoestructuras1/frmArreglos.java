@@ -21,6 +21,7 @@ public class frmArreglos extends javax.swing.JFrame {
 
     public frmArreglos() {
         initComponents();
+        initCustomComponents();
         setLocationRelativeTo(null);
         cargarLogos();
         modeloTabla = (DefaultTableModel) tblVehiculos.getModel();
@@ -38,11 +39,57 @@ public class frmArreglos extends javax.swing.JFrame {
         }
     }
 
+    private void initCustomComponents() {
+        // Inicializar campos
+        lblModeloIns = new javax.swing.JLabel("Modelo:");
+        lblModeloIns.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        txtModeloIns = new javax.swing.JTextField();
+        txtModeloIns.setPreferredSize(new java.awt.Dimension(120, 28));
+        
+        lblTipoMotorIns = new javax.swing.JLabel("Motor:");
+        lblTipoMotorIns.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        txtTipoMotorIns = new javax.swing.JTextField();
+        txtTipoMotorIns.setPreferredSize(new java.awt.Dimension(100, 28));
+        
+        // Agregar a pnlInsertar antes del botón (índice 4)
+        pnlInsertar.add(lblModeloIns, 4);
+        pnlInsertar.add(txtModeloIns, 5);
+        pnlInsertar.add(lblTipoMotorIns, 6);
+        pnlInsertar.add(txtTipoMotorIns, 7);
+        
+        lblModeloMod = new javax.swing.JLabel("Modelo:");
+        lblModeloMod.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        txtModeloMod = new javax.swing.JTextField();
+        txtModeloMod.setPreferredSize(new java.awt.Dimension(100, 28));
+        
+        lblTipoMotorMod = new javax.swing.JLabel("Motor:");
+        lblTipoMotorMod.setFont(new java.awt.Font("Segoe UI", 1, 13));
+        txtTipoMotorMod = new javax.swing.JTextField();
+        txtTipoMotorMod.setPreferredSize(new java.awt.Dimension(100, 28));
+        
+        // Agregar a pnlModificar antes del botón (índice 6)
+        pnlModificar.add(lblModeloMod, 6);
+        pnlModificar.add(txtModeloMod, 7);
+        pnlModificar.add(lblTipoMotorMod, 8);
+        pnlModificar.add(txtTipoMotorMod, 9);
+        
+        // Configurar modelo de tabla
+        tblVehiculos.setModel(new DefaultTableModel(
+            new Object[][]{},
+            new String[]{"Índice", "Placa", "Propietario", "Modelo", "Tipo Motor"}
+        ) {
+            boolean[] canEdit = new boolean[]{false, false, false, false, false};
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+    }
+
     private void cargarTabla() {
         modeloTabla.setRowCount(0);
         Vehiculo[] vehiculos = servicio.obtenerTodos();
         for (int i = 0; i < vehiculos.length; i++) {
-            modeloTabla.addRow(new Object[]{i, vehiculos[i].getPlaca(), vehiculos[i].getPropietario()});
+            modeloTabla.addRow(new Object[]{i, vehiculos[i].getPlaca(), vehiculos[i].getPropietario(), vehiculos[i].getModelo(), vehiculos[i].getTipoMotor()});
         }
     }
 
@@ -313,6 +360,8 @@ public class frmArreglos extends javax.swing.JFrame {
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
         txtPlacaIns.setText("");
         txtPropIns.setText("");
+        txtModeloIns.setText("");
+        txtTipoMotorIns.setText("");
         mostrarPanel("pnlInsertar");
     }//GEN-LAST:event_btnInsertarActionPerformed
 
@@ -324,6 +373,8 @@ public class frmArreglos extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtPlacaMod.setText("");
         txtPropMod.setText("");
+        txtModeloMod.setText("");
+        txtTipoMotorMod.setText("");
         spnIndiceMod.setValue(0);
         mostrarPanel("pnlModificar");
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -341,10 +392,12 @@ public class frmArreglos extends javax.swing.JFrame {
 
     private void btnEjecutarInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarInsertarActionPerformed
         try {
-            servicio.insertar(txtPlacaIns.getText(), txtPropIns.getText());
+            servicio.insertar(txtPlacaIns.getText(), txtPropIns.getText(), txtModeloIns.getText(), txtTipoMotorIns.getText());
             JOptionPane.showMessageDialog(this, "Vehículo insertado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             txtPlacaIns.setText("");
             txtPropIns.setText("");
+            txtModeloIns.setText("");
+            txtTipoMotorIns.setText("");
             cargarTabla();
         } catch (VehiculoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -365,10 +418,12 @@ public class frmArreglos extends javax.swing.JFrame {
     private void btnEjecutarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarModificarActionPerformed
         try {
             int indice = (Integer) spnIndiceMod.getValue();
-            servicio.modificar(indice, txtPlacaMod.getText(), txtPropMod.getText());
+            servicio.modificar(indice, txtPlacaMod.getText(), txtPropMod.getText(), txtModeloMod.getText(), txtTipoMotorMod.getText());
             JOptionPane.showMessageDialog(this, "Vehículo modificado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             txtPlacaMod.setText("");
             txtPropMod.setText("");
+            txtModeloMod.setText("");
+            txtTipoMotorMod.setText("");
             cargarTabla();
         } catch (VehiculoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -447,4 +502,14 @@ public class frmArreglos extends javax.swing.JFrame {
     private javax.swing.JTextField txtPropIns;
     private javax.swing.JTextField txtPropMod;
     // End of variables declaration//GEN-END:variables
+    
+    // Variables customizadas
+    private javax.swing.JLabel lblModeloIns;
+    private javax.swing.JLabel lblModeloMod;
+    private javax.swing.JLabel lblTipoMotorIns;
+    private javax.swing.JLabel lblTipoMotorMod;
+    private javax.swing.JTextField txtModeloIns;
+    private javax.swing.JTextField txtModeloMod;
+    private javax.swing.JTextField txtTipoMotorIns;
+    private javax.swing.JTextField txtTipoMotorMod;
 }

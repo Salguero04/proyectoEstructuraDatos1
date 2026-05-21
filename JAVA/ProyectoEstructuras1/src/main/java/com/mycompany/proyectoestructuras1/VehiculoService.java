@@ -26,9 +26,9 @@ public class VehiculoService {
     }
 
     /** Inserta un nuevo vehículo validando los datos. */
-    public void insertar(String placa, String propietario) throws VehiculoException {
+    public void insertar(String placa, String propietario, String modelo, String tipoMotor) throws VehiculoException {
         try {
-            Vehiculo vehiculo = new Vehiculo(placa, propietario);
+            Vehiculo vehiculo = new Vehiculo(placa, propietario, modelo, tipoMotor);
             repository.insertar(vehiculo);
         } catch (IllegalArgumentException ex) {
             throw new VehiculoException("Error de validación al insertar: " + ex.getMessage(), ex);
@@ -54,9 +54,9 @@ public class VehiculoService {
     }
 
     /** Modifica un vehículo existente por índice. */
-    public void modificar(int indice, String nuevaPlaca, String nuevoPropietario) throws VehiculoException {
+    public void modificar(int indice, String nuevaPlaca, String nuevoPropietario, String nuevoModelo, String nuevoTipoMotor) throws VehiculoException {
         try {
-            Vehiculo vehiculoActualizado = new Vehiculo(nuevaPlaca, nuevoPropietario);
+            Vehiculo vehiculoActualizado = new Vehiculo(nuevaPlaca, nuevoPropietario, nuevoModelo, nuevoTipoMotor);
             repository.modificar(indice, vehiculoActualizado);
         } catch (IllegalArgumentException ex) {
             throw new VehiculoException("Error de validación al modificar: " + ex.getMessage(), ex);

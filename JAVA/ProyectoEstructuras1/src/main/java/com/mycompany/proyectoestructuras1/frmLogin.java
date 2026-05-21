@@ -30,6 +30,10 @@ public class frmLogin extends javax.swing.JFrame {
         } catch (Exception e) {
             lblLogo.setText("LOGO UG");
         }
+        
+        // Sobrescribir textos programáticamente para evitar que NetBeans los borre
+        lblSubtitulo2.setText("CURSO 3-3 NO SOFT");
+        lblSubtitulo3.setText("GRUPO #1");
     }
 
     /**
