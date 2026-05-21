@@ -23,14 +23,14 @@ public class MiniPokedex extends JFrame {
     private JButton btnBurbuja, btnSeleccion, btnInsercion, btnQuicksort, btnNuevos;
     private Timer timer;
 
-    // Barra de tÃ­tulo personalizada
+    // Barra de titulo personalizada
     private JPanel titleBar;
     private JButton btnMin, btnMax, btnClose;
     private boolean maximized = false;
     private int normalX, normalY, normalW, normalH;
 
     public MiniPokedex() {
-        setTitle("PokÃ©dex");
+        setTitle("Pokedex");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 720);
         setLocationRelativeTo(null);
@@ -52,7 +52,7 @@ public class MiniPokedex extends JFrame {
         mainPanel.setOpaque(false);
         setContentPane(mainPanel);
 
-        // Crear barra de tÃ­tulo
+        // Crear barra de titulo
         crearTitleBar();
         mainPanel.add(titleBar, BorderLayout.NORTH);
 
@@ -61,8 +61,8 @@ public class MiniPokedex extends JFrame {
         content.setOpaque(false);
         content.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // TÃ­tulo grande
-        JLabel lblTitulo = new JLabel("POKÃ‰DEX", SwingConstants.CENTER);
+        // Titulo grande
+        JLabel lblTitulo = new JLabel("Pokedex", SwingConstants.CENTER);
         lblTitulo.setFont(new Font("Monospaced", Font.BOLD, 40));
         lblTitulo.setForeground(Color.YELLOW);
         lblTitulo.setBorder(new EmptyBorder(0, 0, 15, 0));
@@ -72,8 +72,8 @@ public class MiniPokedex extends JFrame {
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         panelBotones.setOpaque(false);
         btnBurbuja = crearBoton("BURBUJA");
-        btnSeleccion = crearBoton("SELECCIÃ“N");
-        btnInsercion = crearBoton("INSERCIÃ“N");
+        btnSeleccion = crearBoton("Seleccion");
+        btnInsercion = crearBoton("Insercion");
         btnQuicksort = crearBoton("QUICKSORT");
         btnNuevos = crearBoton("NUEVOS 6");
         panelBotones.add(btnBurbuja);
@@ -92,7 +92,7 @@ public class MiniPokedex extends JFrame {
         ));
         screen.setOpaque(true);
 
-        // Grid de 6 PokÃ©mon
+        // Grid de 6 Pokemon
         panelPokemon = new JPanel(new GridLayout(1, 6, 15, 15));
         panelPokemon.setBackground(new Color(30, 30, 40));
         panelPokemon.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -101,7 +101,7 @@ public class MiniPokedex extends JFrame {
         scrollPokemon.getViewport().setBackground(new Color(30, 30, 40));
         screen.add(scrollPokemon, BorderLayout.CENTER);
 
-        // Ãrea de log (estilo LCD)
+        // area de log (estilo LCD)
         areaLog = new JTextArea(10, 50);
         areaLog.setEditable(false);
         areaLog.setBackground(Color.BLACK);
@@ -126,7 +126,7 @@ public class MiniPokedex extends JFrame {
         content.add(screen, BorderLayout.SOUTH);
         mainPanel.add(content, BorderLayout.CENTER);
 
-        // Cargar lista de 20 PokÃ©mon
+        // Cargar lista de 20 Pokemon
         cargarPool();
         elegirNuevos6();
         precargarSprites(poolCompleto);
@@ -145,8 +145,8 @@ public class MiniPokedex extends JFrame {
         titleBar.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         titleBar.setPreferredSize(new Dimension(getWidth(), 35));
 
-        // TÃ­tulo
-        JLabel lblTitle = new JLabel("  ðŸŽ® ORDEN POKEDEX");
+        // Titulo
+        JLabel lblTitle = new JLabel("    ORDEN POKEDEX");
         lblTitle.setFont(new Font("Monospaced", Font.BOLD, 16));
         lblTitle.setForeground(Color.WHITE);
         titleBar.add(lblTitle, BorderLayout.WEST);
@@ -155,16 +155,13 @@ public class MiniPokedex extends JFrame {
         JPanel panelWin = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
         panelWin.setOpaque(false);
 
-        btnMin = crearBotonWin("â”€");
-        btnMax = crearBotonWin("â–¡");
-        btnClose = crearBotonWin("âœ–");
+        btnMin = crearBotonWin("-");
+        btnMax = crearBotonWin("[]");
+        btnClose = crearBotonWin("X");
 
         btnMin.addActionListener(e -> setExtendedState(JFrame.ICONIFIED));
         btnMax.addActionListener(e -> toggleMaximize());
-        btnClose.addActionListener(e -> {
-            new com.mycompany.proyectoestructuras1.frmOpciones().setVisible(true);
-            dispose();
-        });
+        btnClose.addActionListener(e -> { new com.mycompany.proyectoestructuras1.frmOpciones().setVisible(true); dispose(); });
 
         panelWin.add(btnMin);
         panelWin.add(btnMax);
@@ -196,7 +193,7 @@ public class MiniPokedex extends JFrame {
         b.setFocusPainted(false);
         b.setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 8));
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        if (simbolo.equals("âœ–")) {
+        if (simbolo.equals("X")) {
             b.addMouseListener(new MouseAdapter() {
                 @Override public void mouseEntered(MouseEvent e) { b.setBackground(new Color(200, 50, 50)); }
                 @Override public void mouseExited(MouseEvent e) { b.setBackground(new Color(70, 70, 80)); }
@@ -258,7 +255,7 @@ public class MiniPokedex extends JFrame {
         Collections.shuffle(temp);
         listaActual = new ArrayList<>(temp.subList(0, 6));
         actualizarPanel();
-        areaLog.setText("âœ… Nuevos 6 PokÃ©mon (desordenados).\n");
+        areaLog.setText("  Nuevos 6 Pokemon (desordenados).\n");
         habilitarBotones(true);
     }
 
@@ -296,7 +293,7 @@ public class MiniPokedex extends JFrame {
 
             JLabel lblImg = new JLabel();
             if (p.getSprite() != null) lblImg.setIcon(p.getSprite());
-            else lblImg.setText("ðŸŒ€");
+            else lblImg.setText("🌀");
             lblImg.setHorizontalAlignment(SwingConstants.CENTER);
             tarjeta.add(lblImg, BorderLayout.CENTER);
 

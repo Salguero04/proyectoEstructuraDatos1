@@ -25,7 +25,7 @@ public class AnimadorInsercion implements Animador {
             if (fase == 0) {
                 clave = lista.get(i);
                 j = i - 1;
-                log.append("Insertar " + clave.getNombre() + " (#" + clave.getId() + ") desde posiciÃ³n " + i + "\n");
+                log.append("Insertar " + clave.getNombre() + " (#" + clave.getId() + ") desde posicion " + i + "\n");
                 fase = 1;
                 return true;
             } else if (fase == 1) {
@@ -40,7 +40,7 @@ public class AnimadorInsercion implements Animador {
                 }
             } else {
                 lista.set(j + 1, clave);
-                log.append("  Colocar " + clave.getNombre() + " en posiciÃ³n " + (j + 1) + "\n");
+                log.append("  Colocar " + clave.getNombre() + " en posicion " + (j + 1) + "\n");
                 i++;
                 fase = 0;
                 return true;
@@ -53,5 +53,5 @@ public class AnimadorInsercion implements Animador {
     public List<Pokemon> getListaActual() { return lista; }
 
     @Override
-    public String getNombre() { return "InserciÃ³n"; }
+    public String getNombre() { return "Insercion"; }
 }

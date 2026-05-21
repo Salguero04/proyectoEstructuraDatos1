@@ -51,15 +51,15 @@ public class AnimadorQuicksort implements Animador {
         } else if (subFase == 1) {
             if (j < high) {
                 Pokemon actual = lista.get(j);
-                log.append("  Comparar " + actual.getNombre() + " (#" + actual.getId() + ") con pivote â†’ ");
+                log.append("  Comparar " + actual.getNombre() + " (#" + actual.getId() + ") con pivote → ");
                 if (actual.getId() <= pivoteId) {
                     i++;
-                    log.append("menor/igual â†’ intercambiar posiciones " + i + " y " + j + "\n");
+                    log.append("menor/igual → intercambiar posiciones " + i + " y " + j + "\n");
                     Pokemon temp = lista.get(i);
                     lista.set(i, lista.get(j));
                     lista.set(j, temp);
                 } else {
-                    log.append("mayor â†’ no intercambiar\n");
+                    log.append("mayor → no intercambiar\n");
                 }
                 j++;
                 return true;
@@ -68,7 +68,7 @@ public class AnimadorQuicksort implements Animador {
                 return true;
             }
         } else {
-            log.append("  Colocar pivote en posiciÃ³n " + (i + 1) + "\n");
+            log.append("  Colocar pivote en posicion " + (i + 1) + "\n");
             Pokemon temp = lista.get(i + 1);
             lista.set(i + 1, lista.get(high));
             lista.set(high, temp);

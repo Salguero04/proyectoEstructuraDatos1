@@ -26,7 +26,7 @@ public class AnimadorBurbuja implements Animador {
             if (j < n - i - 1) {
                 Pokemon a = lista.get(j);
                 Pokemon b = lista.get(j + 1);
-                log.append("Comparar " + a.getNombre() + " (#" + a.getId() + ") con " + b.getNombre() + " (#" + b.getId() + ") â†’ ");
+                log.append("Comparar " + a.getNombre() + " (#" + a.getId() + ") con " + b.getNombre() + " (#" + b.getId() + ") → ");
                 if (a.getId() > b.getId()) {
                     // Intercambio
                     lista.set(j, b);

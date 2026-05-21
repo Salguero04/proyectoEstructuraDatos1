@@ -7,7 +7,7 @@ import javax.swing.JTextArea;
 public class AnimadorSeleccion implements Animador {
     private List<Pokemon> lista;
     private int i, j, minIdx;
-    private int estado; // 0 = buscar mÃ­nimo, 1 = intercambiar
+    private int estado; // 0 = buscar minimo, 1 = intercambiar
     private JTextArea log;
 
     public AnimadorSeleccion(List<Pokemon> original, JTextArea log) {
@@ -27,10 +27,10 @@ public class AnimadorSeleccion implements Animador {
                 if (j < n) {
                     Pokemon actualMin = lista.get(minIdx);
                     Pokemon actual = lista.get(j);
-                    log.append("Buscar mÃ­nimo: " + actualMin.getNombre() + " (#" + actualMin.getId() + ") vs " + actual.getNombre() + " (#" + actual.getId() + ") â†’ ");
+                    log.append("Buscar minimo: " + actualMin.getNombre() + " (#" + actualMin.getId() + ") vs " + actual.getNombre() + " (#" + actual.getId() + ") → ");
                     if (actual.getId() < actualMin.getId()) {
                         minIdx = j;
-                        log.append("nuevo mÃ­nimo\n");
+                        log.append("nuevo minimo\n");
                     } else {
                         log.append("no cambia\n");
                     }
@@ -42,12 +42,12 @@ public class AnimadorSeleccion implements Animador {
                 }
             } else {
                 if (minIdx != i) {
-                    log.append("Intercambiar posiciÃ³n " + i + " (" + lista.get(i).getNombre() + ") con mÃ­nimo " + lista.get(minIdx).getNombre() + "\n");
+                    log.append("Intercambiar posicion " + i + " (" + lista.get(i).getNombre() + ") con minimo " + lista.get(minIdx).getNombre() + "\n");
                     Pokemon temp = lista.get(i);
                     lista.set(i, lista.get(minIdx));
                     lista.set(minIdx, temp);
                 } else {
-                    log.append("El mÃ­nimo ya estÃ¡ en su lugar\n");
+                    log.append("El minimo ya esta en su lugar\n");
                 }
                 i++;
                 if (i < n - 1) {
@@ -65,5 +65,5 @@ public class AnimadorSeleccion implements Animador {
     public List<Pokemon> getListaActual() { return lista; }
 
     @Override
-    public String getNombre() { return "SelecciÃ³n"; }
+    public String getNombre() { return "Seleccion"; }
 }

@@ -6,12 +6,12 @@ public class Pokemon {
     private int id;
     private String nombre;
     private String spriteUrl;
-    private ImageIcon sprite; // se cargarÃ¡ despuÃ©s
+    private ImageIcon sprite; // se cargara despues
 
     public Pokemon(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        // Sprite estilo GBA (frontal, de los juegos de tercera generaciÃ³n)
+        // Sprite estilo GBA (frontal, de los juegos de tercera generacion)
         this.spriteUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iii/firered-leafgreen/" + id + ".png";
     }
 
