@@ -15,6 +15,7 @@ public class frmOpciones extends javax.swing.JFrame {
 
     public frmOpciones() {
         initComponents();
+        this.setSize(900, 750); // Aumentar tamaño para mostrar todos los nombres
         setLocationRelativeTo(null);
         cargarLogos();
     }
