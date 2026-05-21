@@ -4,12 +4,12 @@ Este repositorio contiene el sistema final desarrollado en **Java Swing** para l
 
 ## 👥 Integrantes del Grupo #1
 
-*   **Mario Alexander Salguero Castillo** - *Programador Principal (Lead Developer)* 💻
-*   **Michelle de Jesus Alcivar Contreras** - *Documentación y Análisis* 📝
-*   **Eddy Raymundo Banchon Arellano** - *Desarrollador*
-*   **Leonel Gilmar Chimbolema Yumizaca** - *Desarrollador*
-*   **Luis Nahin Jaime Reyes** - *Desarrollador*
-*   **Jose Emanuel Ordeñana Arevalo** - *Desarrollador*
+*   **Mario Alexander Salguero Castillo** - *Desarrollador Principal y Formulario Arreglos* 💻
+*   **Michelle de Jesus Alcivar Contreras** - *Login, Documentación y Análisis* 📝
+*   **Eddy Raymundo Banchon Arellano** - *Formulario Ordenamiento* 👾
+*   **Luis Nahin Jaime Reyes** - *Formulario Ordenamiento* 👾
+*   **Jose Emanuel Ordeñana Arevalo** - *Formulario Recursividad* 🔄
+*   **Leonel Gilmar Chimbolema Yumizaca** - *Formulario Búsqueda* 🔍
 
 ## 🛠️ Características del Programa
 
